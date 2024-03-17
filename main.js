@@ -15,13 +15,18 @@
 
 let computerNum = 0;
 let chance = 5;
+let resultHistory =""
 let playButton = document.getElementById("play-button");
 let userInput = document.getElementById("user-input");
 let resultArea = document.getElementById("result-area");
 let resetButton = document.getElementById("reset-button");
 let chanceArea = document.getElementById("chance-area");
+let historyArea = document.getElementById("history-area");
 
-console.log(chanceArea);
+console.log(historyArea);
+
+
+
 
 playButton.addEventListener("click",play);
 playButton.addEventListener("click",countChance);
@@ -32,24 +37,29 @@ function pickRandomNum(){
 }
 
 
+
 function play(){
     let userValue = userInput.value // input태그에 입력된 값 가져오기
-   
 
     if(computerNum < userValue){
-        let resultDown = userValue+" 보다 더 작은수입니다"
-        resultArea.textContent = resultDown
+        resultHistory = userValue+" 보다 더 작은수입니다"
+        resultArea.textContent = resultHistory
+        
     
     }else if(computerNum > userValue){
-        let resultUp = userValue+" 보다 더 큰 수입니다"
-        resultArea.textContent = resultUp
+        resultHistory = userValue+" 보다 더 큰 수입니다"
+        resultArea.textContent = resultHistory
     }else{
-        let resultCorretAnswer = "정답입니다"
-        resultArea.textContent = resultCorretAnswer
+        resultHistory = "정답입니다"
+        resultArea.textContent = resultHistory
     }
-
+    
+    history();
 }
 
+function history(){
+    historyArea.textContent = resultHistory
+}
 
 function reset(){
     //input칸 숫자 없애기
