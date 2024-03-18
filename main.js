@@ -42,23 +42,26 @@ function play(){
     let userValue = userInput.value // input태그에 입력된 값 가져오기
 
     if(computerNum < userValue){
-        resultHistory = userValue+" 보다 더 작은수입니다"
-        resultArea.textContent = resultHistory
+        resultHistory = `${userValue} 보다 더 작은수입니다`
+    
         
     
     }else if(computerNum > userValue){
-        resultHistory = userValue+" 보다 더 큰 수입니다"
-        resultArea.textContent = resultHistory
+        resultHistory = `${userValue} 보다 더 큰 수입니다`
+        
     }else{
         resultHistory = "정답입니다"
-        resultArea.textContent = resultHistory
+        
     }
     
+    resultArea.textContent = resultHistory
+
     history();
 }
 
 function history(){
     historyArea.textContent = resultHistory
+
 }
 
 function reset(){
@@ -68,6 +71,7 @@ function reset(){
     //기회 초기화
     userInput.value=""
     resultArea.textContent = "결과나오는곳"
+    historyArea.textContent = ""
     pickRandomNum();
     chance = 5;
     chanceArea.textContent = chance+" / 5";
@@ -89,6 +93,7 @@ function countChance(){
 function gameOver(){
     console.log("game over")
     chanceArea.textContent = "game over! press reset button";
+    playButton.disabled = true;
 }
 
 pickRandomNum();
