@@ -22,6 +22,7 @@ let resultArea = document.getElementById("result-area");
 let resetButton = document.getElementById("reset-button");
 let chanceArea = document.getElementById("chance-area");
 let historyArea = document.getElementById("history-area");
+let historyNum = [];
 
 console.log(historyArea);
 
@@ -29,7 +30,7 @@ console.log(historyArea);
 
 
 playButton.addEventListener("click",play);
-playButton.addEventListener("click",countChance);
+//playButton.addEventListener("click",countChance); 원래 클릭수 카운팅해서 chance값으로 저장했는데 빼버림
 resetButton.addEventListener("click",reset);
 
 function pickRandomNum(){
@@ -40,8 +41,16 @@ function pickRandomNum(){
 
 function play(){
     let userValue = userInput.value // input태그에 입력된 값 가져오기
+    
+    if(0>userValue||userValue>100){
+    resultArea.textContent = "1~100사이수입력"
+    return;
+    }
+    else if(userValue){
 
-    if(computerNum < userValue){
+    }
+
+    else if(computerNum < userValue){
         resultHistory = `${userValue} 보다 더 작은수입니다`
     
         
@@ -55,8 +64,12 @@ function play(){
     }
     
     resultArea.textContent = resultHistory
-
+   
+    
+    countChance();
+    historyCheck();
     history();
+    
 }
 
 function history(){
@@ -69,12 +82,21 @@ function reset(){
     //결과나오는곳 칸 리셋
     //새로운 번호 생성
     //기회 초기화
+    if(chance==0){
+        playButton.disabled = false;
+        chanceArea.textContent = "";
+        chance =5;
+        return;
+        }
     userInput.value=""
     resultArea.textContent = "결과나오는곳"
     historyArea.textContent = ""
     pickRandomNum();
     chance = 5;
     chanceArea.textContent = chance+" / 5";
+    historyNum=[]
+    
+
 
 }
 
@@ -91,12 +113,21 @@ function countChance(){
 }
 
 function gameOver(){
-    console.log("game over")
+    console.log(chance)
     chanceArea.textContent = "game over! press reset button";
+    
     playButton.disabled = true;
+    
+    
 }
 
+function historyCheck(){
+    let userValue = userInput.value
+
+    historyNum.push(userValue);
+    console.log(historyNum);
+}
+
+
 pickRandomNum();
-chanceArea.textContent = chance+" / 5";
-
-
+//chanceArea.textContent = chance+" / 5";
