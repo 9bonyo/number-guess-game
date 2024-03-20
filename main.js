@@ -10,7 +10,7 @@
 //게임 오버 시 정답 알려주기
 //범위 밖 숫자 입력, '입력값 확인하세요', 기회 깎지 않음
 //유저가 이미 쓴 번호를 입력하면 '이미 쓴 번호', 기회 깎지 않음
-//추가기능 +
+//추가기능 + 이전결과이력 다 출력 <미해결
 
 
 let computerNum = 0;
@@ -42,13 +42,11 @@ function pickRandomNum(){
 function play(){
     let userValue = userInput.value // input태그에 입력된 값 가져오기
     
-    if(0>userValue||userValue>100){
+    if(0>userValue||userValue>99){
     resultArea.textContent = "1~100사이수입력"
     return;
     }
-    else if(userValue){
-
-    }
+    
 
     else if(computerNum < userValue){
         resultHistory = `${userValue} 보다 더 작은수입니다`
@@ -65,17 +63,17 @@ function play(){
     
     resultArea.textContent = resultHistory
    
-    
-    countChance();
     historyCheck();
-    history();
+    
+    
+    
     
 }
 
-function history(){
-    historyArea.textContent = resultHistory
+// function history(){
+//     historyArea.textContent = resultHistory
 
-}
+// }
 
 function reset(){
     //input칸 숫자 없애기
@@ -86,7 +84,7 @@ function reset(){
         playButton.disabled = false;
         chanceArea.textContent = "";
         chance =5;
-        return;
+        
         }
     userInput.value=""
     resultArea.textContent = "결과나오는곳"
@@ -124,8 +122,16 @@ function gameOver(){
 function historyCheck(){
     let userValue = userInput.value
 
+    if(historyNum.includes(userValue)==true){
+        resultArea.textContent="이미입력한수입니다"
+    
+        return;
+    }
+
     historyNum.push(userValue);
     console.log(historyNum);
+
+    countChance();
 }
 
 
